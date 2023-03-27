@@ -1,8 +1,8 @@
 package org.sangtran.config;
 
-
-import jakarta.servlet.Filter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -14,27 +14,32 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
+@Slf4j
 @RequiredArgsConstructor
 public class SecurityConfiguration {
     private final JwtAuthenticationFilter jwtAuthFilter;
 
     private final AuthenticationProvider authenticationProvider;
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
-        httpSecurity
-                .csrf()
-                .disable()
-                .authorizeHttpRequests()
-                .requestMatchers("")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-        return httpSecurity.build();
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws  Exception{
+
+           httpSecurity
+                   .csrf()
+                   .disable()
+                   .authorizeHttpRequests()
+                   .requestMatchers("/api/v1/auth/**")
+                   .permitAll()
+                   .anyRequest()
+                   .authenticated()
+                   .and()
+                   .sessionManagement()
+                   .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                   .and()
+                   .authenticationProvider(authenticationProvider)
+                   .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+           return httpSecurity.build();
+
+
+
     }
 }

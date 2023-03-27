@@ -11,6 +11,8 @@
     <modules>
         <module>customer</module>
         <module>product</module>
+        <module>ban</module>
+        <module>eureka</module>
     </modules>
 
     <properties>

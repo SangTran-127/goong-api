@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @Slf4j
 @RestController
-@RequestMapping("/customer")
+@RequestMapping("/api/v1/user")
 public class UserController {
     @Autowired
     private CustomerService customerService;
