@@ -3,9 +3,11 @@ import lombok.AllArgsConstructor;
 import org.sangtran.entity.Log;
 import org.sangtran.repository.LogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -14,7 +16,7 @@ public class LogService {
     @Autowired
     private LogRepository fraudCheckHistoryRepository;
 
-    public boolean isFraudulentCustomer(Integer customerId) {
+    public void setFraudulentCustomer(Integer customerId) {
         fraudCheckHistoryRepository.save(
                 Log.builder()
                         .customerId(customerId)
@@ -22,6 +24,9 @@ public class LogService {
                         .createdAt(LocalDateTime.now())
                         .build()
         );
-        return false;
+    }
+    public Boolean checkFraudustomer(Integer customerId) {
+        Optional<Log> isFraud = this.fraudCheckHistoryRepository.findByUserId(customerId);
+        return isFraud.isPresent();
     }
 }

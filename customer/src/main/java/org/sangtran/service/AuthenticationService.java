@@ -1,9 +1,7 @@
 package org.sangtran.service;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import org.sangtran.dto.AuthenticationResponse;
-import org.sangtran.dto.LogResponse;
 import org.sangtran.dto.RegisterRequest;
 import org.sangtran.entity.Role;
 import org.sangtran.entity.User;

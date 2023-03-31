@@ -1,14 +1,16 @@
 server:
-  port: 8080
+  port: 8084
 spring:
+  application:
+    name: product
   datasource:
-    url: jdbc:postgresql://localhost:5432/goong_user
+    url: jdbc:postgresql://localhost:5432/goong_cart
     username: postgres
     password: sangtran1207@@
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     show-sql: true
     properties:
       hibernate:

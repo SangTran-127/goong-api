@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "Log")
 public class Log {
     @Id
     @SequenceGenerator(
@@ -24,8 +24,14 @@ public class Log {
             strategy = GenerationType.SEQUENCE,
             generator = "fraud_id_sequence"
     )
+    @Column(nullable = false)
+
     private Integer id;
+    @Column(nullable = false)
+
     private Integer customerId;
+    @Column(nullable = false)
+
     private Boolean isFraudster;
     private LocalDateTime createdAt;
 

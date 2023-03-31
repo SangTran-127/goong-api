@@ -22,8 +22,7 @@ public class LogController {
         @GetMapping(path = "{customerId}")
         public LogResponse isFraudster(
                 @PathVariable("customerId") Integer customerId) {
-            boolean isFraudulentCustomer = logCheckService.
-                    isFraudulentCustomer(customerId);
+            boolean isFraudulentCustomer = logCheckService.checkFraudustomer(customerId);
             log.info("fraud check request for customer {}", customerId);
             return new LogResponse(isFraudulentCustomer);
         }

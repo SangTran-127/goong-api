@@ -5,7 +5,6 @@ import org.sangtran.dto.AddProductDto;
 import org.sangtran.enity.Product;
 import org.sangtran.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,4 +31,5 @@ public class ProductController {
     public ResponseEntity<Product> addProduct(@RequestBody AddProductDto productDto) {
         return ResponseEntity.ok(this.productService.addProduct(productDto));
     }
+
 }
