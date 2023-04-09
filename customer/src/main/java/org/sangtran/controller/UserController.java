@@ -3,6 +3,7 @@ package org.sangtran.controller;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.sangtran.dto.AddCustomerDto;
+import org.sangtran.dto.LoginCustomerDto;
 import org.sangtran.entity.User;
 import org.sangtran.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,12 @@ public class UserController {
     public ResponseEntity<List<User>> getAllCustomer() {
         return new ResponseEntity<>(this.customerService.getAllCustomer(), HttpStatusCode.valueOf(200));
     }
-    @PostMapping()
-    public void addCustomer(@RequestBody @Valid AddCustomerDto customerDto) {
-      log.info(customerDto.email);
+    @GetMapping("/login")
+    public ResponseEntity<User> login(@RequestBody LoginCustomerDto loginCustomerDto) throws Exception {
+        return ResponseEntity.ok(this.customerService.getCustomerByEmailAndPassword(loginCustomerDto));
+    }
+    @PostMapping("/register")
+    public ResponseEntity<User> register(@RequestBody @Valid AddCustomerDto customerDto) {
+        return ResponseEntity.ok(this.customerService.addCustomer(customerDto));
     }
 }

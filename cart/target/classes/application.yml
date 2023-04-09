@@ -2,9 +2,9 @@ server:
   port: 8084
 spring:
   application:
-    name: product
+    name: cart
   datasource:
-    url: jdbc:postgresql://localhost:5432/goong_cart
+    url: jdbc:postgresql://localhost:5432/goong_product
     username: postgres
     password: sangtran1207@@
     driver-class-name: org.postgresql.Driver

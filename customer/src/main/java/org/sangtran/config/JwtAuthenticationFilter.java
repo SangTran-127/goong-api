@@ -31,14 +31,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
            @NonNull HttpServletResponse response,
            @NonNull FilterChain filterChain)
             throws ServletException, IOException {
+        if (request.getServletPath().contains("/api/v1/auth")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+        final String userEmail;
+        if (authHeader == null ||!authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
         }
         jwt = authHeader.substring(7);
-        String userEmail = jwtService.extractUsername(jwt);
+        userEmail = jwtService.extractUsername(jwt);
         // user not authen
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             // get user from the db

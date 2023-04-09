@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Entity
 @AllArgsConstructor
@@ -20,9 +22,9 @@ public class Cart {
     private Integer id;
     @NotNull
     private Integer customerId;
+
     @NotNull
-    private Integer productId;
-
-
+    @OneToMany()
+    private List<ProductCart> productCartList;
 
 }
